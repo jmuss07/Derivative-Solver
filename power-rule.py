@@ -1,3 +1,4 @@
+# Write your code here :-)
 import re
 import time
 
@@ -11,28 +12,25 @@ while not cont:
         if n == ";":
             cont = True
         else:
-            alpha_bees = re.compile("[a-z]")
-            beta_bees = re.compile("[\d]")
-            v_bees = re.match(alpha_bees,base)
-            c_bees = re.match(beta_bees, base)
-            
-            if c_bees == None:
+            alpha_bees = re.compile("^(\d*)([a-z])\n?$")
+            bees = re.match(alpha_bees,base)
+
+            if bees == None:
+                # invalid string
+                continue
+            if bees[1] is None:
                 c = 1
             else:
-                c = c_bees
-                
-            if v_bees == None:
-                v = 1
-            else:
-                v = v_bees
-                
+                c = bees[1]
+                v = bees[2]
+
             toad = f"{c}{v}^{n}"
             confirm = input(f"\nIs '{toad}' correct? (Y/N)\t")
             if confirm.lower() == "y":
                 print()
                 new_n = int(n) - 1
-                tadpole = f"{n}*{c}{v} ^ {new_n}"
+                frog = int(n)*int(c)
+                tadpole = f"{frog}{v} ^ {new_n}"
                 print(f"\nThe derivative of '{toad}' is '{tadpole}'")
                 time.sleep(.5)
-                    
-                    
+
